@@ -7,3 +7,24 @@
   margin: 0;
   padding: 0;
 }
+.page-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.page-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 400ms ease-out;
+}
+
+.page-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.page-exit-active {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 400ms ease-out;
+}

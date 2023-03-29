@@ -2,12 +2,16 @@ import Pokemons from "./components/Pokemons";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { pokeball } from "./assets";
+import PokemonDetails from "./components/PokemonDetails";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const url = "https://pokeapi.co/api/v2/pokemon/?limit=151";
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -31,7 +35,9 @@ const App = () => {
     fetchPokemons();
   }, []);
 
-  console.log(pokemons);
+  const handlePokemonClick = (pokemon) => {
+    setSelectedPokemon(pokemon);
+  };
 
   // You can pass the fetched pokemons as a prop to your <Pokemons /> component
   return (
@@ -39,9 +45,28 @@ const App = () => {
       <img
         src={pokeball}
         alt="pokeball"
-        className=" hidden sm:block w-1/3  lg:w-1/4 absolute -top-20 -right-30 bg-opacity-30 -z-10"
+        className="  sm:block w-2/3  lg:w-1/4 absolute -top-20 -right-30 bg-opacity-30 -z-10"
       />
-      <Pokemons pokemons={pokemons} />
+      <TransitionGroup>
+        <CSSTransition
+          key={selectedPokemon ? "details" : "list"}
+          classNames="page"
+          timeout={300}
+        >
+          {!selectedPokemon ? (
+            <Pokemons
+              pokemons={pokemons}
+              loading={loading}
+              handlePokemonClick={handlePokemonClick}
+            />
+          ) : (
+            <PokemonDetails
+              pokemon={selectedPokemon}
+              onBack={() => setSelectedPokemon(null)}
+            />
+          )}
+        </CSSTransition>
+      </TransitionGroup>
     </div>
   );
 };
