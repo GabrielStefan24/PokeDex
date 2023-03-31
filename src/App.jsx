@@ -45,7 +45,11 @@ const App = () => {
       <img
         src={pokeball}
         alt="pokeball"
-        className="  sm:block w-2/3  lg:w-1/4 absolute -top-20 -right-30 bg-opacity-30 -z-10"
+        className={`${
+          selectedPokemon
+            ? "hidden"
+            : "sm:block w-2/3  lg:w-1/4 absolute -top-20 -right-30 bg-opacity-30 -z-10 "
+        }`}
       />
       <TransitionGroup>
         <CSSTransition
@@ -58,11 +62,15 @@ const App = () => {
               pokemons={pokemons}
               loading={loading}
               handlePokemonClick={handlePokemonClick}
+              selectedPokemon={selectedPokemon}
             />
           ) : (
             <PokemonDetails
               pokemon={selectedPokemon}
-              onBack={() => setSelectedPokemon(null)}
+              onBack={() => {
+                console.log("called");
+                setSelectedPokemon(null);
+              }}
             />
           )}
         </CSSTransition>

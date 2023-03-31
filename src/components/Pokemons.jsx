@@ -1,5 +1,8 @@
 import { pokeball } from "../assets";
 import { useState, useEffect } from "react";
+import Color from "../utils/Color";
+import ColorButton from "../utils/ColorButton";
+import capitalizeFirstLetter from "../utils/Capitalize";
 
 const Pokemons = ({ pokemons, loading, handlePokemonClick }) => {
   const [search, setSearch] = useState("");
@@ -14,8 +17,9 @@ const Pokemons = ({ pokemons, loading, handlePokemonClick }) => {
       )
     );
   }, [search, pokemons]);
+
   return (
-    <div className=" w-5/6 mx-auto px-5 relative">
+    <div className=" w-5/6 mx-auto px-5 relative py-6">
       <header className="flex flex-col justify-center items-center">
         <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-black mt-10">
           PokeDex
@@ -30,7 +34,9 @@ const Pokemons = ({ pokemons, loading, handlePokemonClick }) => {
         />
       </header>
       {loading ? (
-        <h1 className="text-4xl text-center">Loading...</h1>
+        <h1 className="text-4xl text-center">
+          Please wait,loading takes a bit first time...
+        </h1>
       ) : (
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 mt-10">
           {filteredPokemons &&
@@ -39,76 +45,26 @@ const Pokemons = ({ pokemons, loading, handlePokemonClick }) => {
                 <article
                   onClick={() => handlePokemonClick(pokemon)}
                   key={pokemon.id}
-                  className={`flex hover:scale-105 transition-all ease-in duration-200 rounded-[30px] ${
-                    pokemon.types[0].type.name == "grass"
-                      ? "bg-green-500"
-                      : pokemon.types[0].type.name == "fire"
-                      ? "bg-red-500"
-                      : pokemon.types[0].type.name == "normal"
-                      ? "bg-gray-500"
-                      : pokemon.types[0].type.name == "bug"
-                      ? "bg-green-800"
-                      : pokemon.types[0].type.name == "water"
-                      ? "bg-blue-500"
-                      : pokemon.types[0].type.name == "poison"
-                      ? "bg-purple-600"
-                      : pokemon.types[0].type.name == "electric"
-                      ? "bg-yellow-500"
-                      : pokemon.types[0].type.name == "fairy"
-                      ? "bg-pink-300"
-                      : pokemon.types[0].type.name == "ground"
-                      ? "bg-amber-200"
-                      : pokemon.types[0].type.name == "fighting"
-                      ? "bg-red-900"
-                      : pokemon.types[0].type.name == "rock"
-                      ? "bg-yellow-800"
-                      : pokemon.types[0].type.name == "ghost"
-                      ? "bg-purple-900"
-                      : "bg-pink-600"
-                  } p-4 relative overflow-hidden min-h-[250px] cursor-pointer`}
+                  style={{
+                    backgroundColor: Color(pokemon.types[0].type.name),
+                  }}
+                  className="flex hover:scale-105 transition-all ease-in duration-200 rounded-[30px]  p-4 relative overflow-hidden min-h-[250px] cursor-pointer"
                 >
                   <div className="text-left mb-2 flex-1 font-mono text-white ">
                     {pokemon.forms.length > 0 && (
                       <h1 className="font-bold text-lg px-2 ">
-                        {pokemon.forms[0].name}
+                        {capitalizeFirstLetter(pokemon.forms[0].name)}
                       </h1>
                     )}
-                    {pokemon.types.map((typepoke) => (
+                    {pokemon.types.map((pokemonType) => (
                       <p
-                        key={typepoke.type.name}
-                        className={`text-sm inline-block mx-1 p-2 rounded-full mt-1 ${
-                          typepoke.type.name == "grass"
-                            ? "bg-green-600"
-                            : typepoke.type.name == "fire"
-                            ? "bg-red-600"
-                            : typepoke.type.name == "normal"
-                            ? "bg-gray-600"
-                            : typepoke.type.name == "bug"
-                            ? "bg-green-900"
-                            : typepoke.type.name == "water"
-                            ? "bg-blue-600"
-                            : typepoke.type.name == "poison"
-                            ? "bg-purple-700"
-                            : typepoke.type.name == "electric"
-                            ? "bg-yellow-600"
-                            : typepoke.type.name == "fairy"
-                            ? "bg-pink-400"
-                            : typepoke.type.name == "ground"
-                            ? "bg-amber-300"
-                            : typepoke.type.name == "fighting"
-                            ? "bg-red-800"
-                            : typepoke.type.name == "rock"
-                            ? "bg-yellow-900"
-                            : typepoke.type.name == "ghost"
-                            ? "bg-purple-800"
-                            : typepoke.type.name == "psychic"
-                            ? "bg-pink-700"
-                            : typepoke.type.name == "ice"
-                            ? "bg-blue-400"
-                            : "bg-gray-400"
-                        }`}
+                        key={pokemonType.type.name}
+                        className="text-sm inline-block mx-1 p-2 rounded-full mt-1"
+                        style={{
+                          backgroundColor: ColorButton(pokemonType.type.name),
+                        }}
                       >
-                        {typepoke.type.name}
+                        {pokemonType.type.name}
                       </p>
                     ))}
                   </div>
