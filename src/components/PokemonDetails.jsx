@@ -25,7 +25,7 @@ const PokemonDetails = ({ pokemon, onBack }) => {
 
   return (
     <div
-      className="container px-5 relative "
+      className=" px-5 relative  "
       style={{
         backgroundColor: Color(pokemon.types[0].type.name),
         minHeight: "100vh",
@@ -49,7 +49,7 @@ const PokemonDetails = ({ pokemon, onBack }) => {
         <img
           src={pokeball}
           alt="pokeball"
-          className="absolute w-5/6 opacity-20  top-10 left-[50%] translate-x-[-50%] md:w-2/4"
+          className="absolute w-5/6 opacity-20  top-10 left-[50%] translate-x-[-50%] md:w-1/4"
         />
         <img
           src={pokemon.sprites.other.home.front_default}
@@ -111,7 +111,7 @@ const PokemonDetails = ({ pokemon, onBack }) => {
         >
           Stats
         </h3>
-        <section className="flex flex-col w-full sm:w-5/6 text-[10px] sm:text-xl ">
+        <section className="flex flex-col w-full sm:w-5/6 text-[10px] sm:text-xl lg:w-2/4  ">
           <div className="grid grid-cols-8">
             <p
               className="font-bold  "
