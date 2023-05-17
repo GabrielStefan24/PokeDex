@@ -15,16 +15,24 @@ Each Pokemon has a dedicated page with more detailed data, providing users with 
 ---
 ## Screenshots
 
-### Pokemon List
+<div align="center">
+  
+  <h1> Pokemon List</h1>
+</div>
 
 <div align="center">
   <img src="./public/List.JPG" width="800" height="450" />
 </div>
-### Pokemon Page
+
+<div align="center">
+  
+  <h1>🔍 Pokemon Page</h1>
+</div>
 
 <div align="center">
   <img src="./public/Pokemon.JPG" width="800" height="450" />
 </div>
+
 ### 🛠️ Built With
 
 - [React.js](https://reactjs.org/)
